@@ -13,7 +13,6 @@ public class MovementController : MonoBehaviour
     public float fallMultiplier = 2.5f; 
     public float lowJumpMultiplier = 2f;
     
-    bool isGrounded = false; 
     public Transform isGroundedChecker; 
     public float checkGroundRadius; 
     public LayerMask groundLayer;
