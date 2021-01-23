@@ -3,24 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Ink.Runtime;
 
 public class DialogManager : MonoBehaviour
 {
     public TextMeshProUGUI textDisplay;
-    public string[] sentences;
+
     public float typingSpeed;
     public GameObject continueButton;
-    
+    public GameManager gameManager;
     private int index;
 
-    private void Start()
-    {
-        StartCoroutine(Type());
-    }
 
-    IEnumerator Type()
+    public TextAsset inkFile;
+    public Story story;
+    
+    
+    // private void Start()
+    // {
+    //     story = new Story(inkFile.text);
+    //     NextSentence();
+    //     gameManager.StopPlayer();
+    // }
+
+    public void StartConversation()
     {
-        foreach (char letter in sentences[index].ToCharArray())
+        gameObject.SetActive(true);
+        story = new Story(inkFile.text);
+        NextSentence();
+        gameManager.StopPlayer();
+    }
+    
+    IEnumerator Type(string sentence)
+    {
+        textDisplay.text = "";
+        foreach (char letter in sentence.ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
@@ -31,15 +48,22 @@ public class DialogManager : MonoBehaviour
     public void NextSentence()
     {
         continueButton.SetActive(false);
-        if (index < sentences.Length - 1)
+        if (story.canContinue)
         {
-            index++;
-            textDisplay.text = "";
-            StartCoroutine(Type());
+            AdvanceDialog();
         }
         else
         {
             textDisplay.text = "";
+            gameObject.SetActive(false);
+            gameManager.ResumePlayer();
         }
+
+    }
+
+    private void AdvanceDialog()
+    {
+        string currentSentence = story.Continue();
+        StartCoroutine(Type(currentSentence));
     }
 }

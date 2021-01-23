@@ -12,15 +12,41 @@ public class MovementController : MonoBehaviour
     public GroundCheckerController groundCheckController;
     public float fallMultiplier = 2.5f; 
     public float lowJumpMultiplier = 2f;
-    
-    public Transform isGroundedChecker; 
-    public float checkGroundRadius; 
-    public LayerMask groundLayer;
+    public bool canMove = true;
+    public float dashforce;
+
+    private Vector3 playerStartingPos;
+
+    private void Start()
+    {
+        playerStartingPos = transform.position;
+    }
+
     void Update()
     {
-        Move();
-        Jump();
-        BetterJump();
+        if (canMove)
+        {
+            Move();
+            Jump();
+            BetterJump();
+            Dash();
+        }
+
+    }
+    
+    public void MovePlayerAtStartOfLevel()
+    {
+        transform.position = playerStartingPos;
+    }
+    public void StopMoving()
+    {
+        canMove = false;
+        rg.velocity = new Vector2(0f, 0f); 
+    }
+
+    public void ResumeMoving()
+    {
+        canMove = true;
     }
 
     private void Move() { 
@@ -38,12 +64,29 @@ public class MovementController : MonoBehaviour
         }
     }
     
-    void BetterJump() {
+    private void BetterJump() {
         if (rg.velocity.y < 0) {
             rg.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         } else if (rg.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
             rg.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }   
+    }
+
+    private void Dash()
+    {
+        float x = Input.GetAxisRaw("Horizontal"); 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rg.velocity = new Vector2(rg.velocity.y, dashforce);
+            if (x > 0)
+            {
+                rg.velocity = new Vector2(dashforce, rg.velocity.y); 
+            }
+            else
+            {
+                rg.velocity = new Vector2(-dashforce, rg.velocity.y); 
+            }
+        }
     }
     
 }
