@@ -14,11 +14,17 @@ public class MovementController : MonoBehaviour
     public float lowJumpMultiplier = 2f;
     public bool canMove = true;
     public float dashforce;
-
+    private float dashTime;
+    public float startDashTime;
+    
+    private int direction; // 1:left, 2:right, 0:nothing
     private Vector3 playerStartingPos;
 
+    //private bool facing = false; // true: left, false: right
+    
     private void Start()
     {
+        dashTime = startDashTime;
         playerStartingPos = transform.position;
     }
 
@@ -26,10 +32,9 @@ public class MovementController : MonoBehaviour
     {
         if (canMove)
         {
-            Move();
+            Dash();
             Jump();
             BetterJump();
-            Dash();
         }
 
     }
@@ -49,10 +54,11 @@ public class MovementController : MonoBehaviour
         canMove = true;
     }
 
-    private void Move() { 
-        float x = Input.GetAxisRaw("Horizontal"); 
-        float moveBy = x * horizontalSpeed; 
-        rg.velocity = new Vector2(moveBy, rg.velocity.y); 
+    private void Move(float moveX)
+    {
+        float moveBy = moveX * horizontalSpeed;
+        rg.velocity = new Vector2(moveBy, rg.velocity.y);
+        
     }
 
     private void Jump()
@@ -72,21 +78,48 @@ public class MovementController : MonoBehaviour
         }   
     }
 
+
     private void Dash()
     {
-        float x = Input.GetAxisRaw("Horizontal"); 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        float x = Input.GetAxisRaw("Horizontal");
+        Move(x);
+        if (direction == 0)
         {
-            rg.velocity = new Vector2(rg.velocity.y, dashforce);
-            if (x > 0)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                rg.velocity = new Vector2(dashforce, rg.velocity.y); 
+                if (x < 0)
+                {
+                    direction = 1;
+                }
+                else if (x > 0)
+                {
+                    direction = 2;
+                }
+            }
+        }
+        else
+        {
+            if (dashTime <= 0)
+            {
+                direction = 0;
+                dashTime = startDashTime;
+                rg.velocity = Vector2.zero;
             }
             else
             {
-                rg.velocity = new Vector2(-dashforce, rg.velocity.y); 
+                dashTime -= Time.deltaTime;
+
+                if (direction == 1)
+                {
+                    rg.velocity = Vector2.left * dashforce;
+                }
+                else if (direction == 2)
+                {
+                    rg.velocity = Vector2.right * dashforce;
+                }
             }
         }
     }
+
     
 }

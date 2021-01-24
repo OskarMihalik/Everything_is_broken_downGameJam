@@ -105,11 +105,8 @@ MonoBehaviour:
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   canMove: 1
-  isGroundedChecker: {fileID: 978439316612576091}
-  checkGroundRadius: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  dashforce: 50
+  startDashTime: 0.1
 --- !u!61 &978439316124784950
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +152,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 0eefb00535456f971b8bf13aaf560fc6, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &978439316612576090
 GameObject:
