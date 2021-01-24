@@ -17,14 +17,6 @@ public class DialogManager : MonoBehaviour
 
     public TextAsset inkFile;
     public Story story;
-    
-    
-    // private void Start()
-    // {
-    //     story = new Story(inkFile.text);
-    //     NextSentence();
-    //     gameManager.StopPlayer();
-    // }
 
     public void StartConversation()
     {
