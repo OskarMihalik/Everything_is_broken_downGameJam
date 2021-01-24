@@ -16,6 +16,8 @@ public class MovementController : MonoBehaviour
     private float dashTime;
     public float startDashTime;
     public bool canDash;
+
+    private AudioManager audioManager;
     
     private int direction; // 1:left, 2:right, 0:nothing
     private Vector3 playerStartingPos;
@@ -28,6 +30,7 @@ public class MovementController : MonoBehaviour
         _trailRenderer = GetComponent<TrailRenderer>();
         dashTime = startDashTime;
         playerStartingPos = transform.position;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -79,6 +82,7 @@ public class MovementController : MonoBehaviour
         {
             rg.velocity = new Vector2(rg.velocity.x, jumpForce);
             groundCheckController.isGrounded = false;
+            audioManager.Play("Jump");
         }
     }
     
