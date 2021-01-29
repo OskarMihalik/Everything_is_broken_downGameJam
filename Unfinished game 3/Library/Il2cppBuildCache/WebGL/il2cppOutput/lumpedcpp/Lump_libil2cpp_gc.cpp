@@ -1,0 +1,7 @@
+#include "il2cpp-config.h"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/BoehmGC.cpp"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/GCHandle.cpp"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/GarbageCollector.cpp"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/NullGC.cpp"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/WriteBarrier.cpp"
+#include "/home/oskar/Unity/Hub/Editor/2020.2.0f1/Editor/Data/il2cpp/libil2cpp/gc/WriteBarrierValidation.cpp"

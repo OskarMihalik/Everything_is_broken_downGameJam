@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7884883300815280867, guid: 13497e7354cee5da399b03b91bac0c53, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7884883300815280868, guid: 13497e7354cee5da399b03b91bac0c53, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -259,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 7884883300815280867, guid: 13497e7354cee5da399b03b91bac0c53, type: 3}
       propertyPath: m_Name
       value: Square (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884883300815280867, guid: 13497e7354cee5da399b03b91bac0c53, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7884883300815280868, guid: 13497e7354cee5da399b03b91bac0c53, type: 3}
       propertyPath: m_RootOrder
